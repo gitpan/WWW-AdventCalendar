@@ -1,0 +1,38 @@
+{
+   "resources" : {
+      "repository" : "origin"
+   },
+   "meta-spec" : {
+      "version" : 1.4,
+      "url" : "http://module-build.sourceforge.net/META-spec-v1.4.html"
+   },
+   "generated_by" : "Dist::Zilla version 1.093400",
+   "version" : "0.093580",
+   "name" : "WWW-AdventCalendar",
+   "author" : [
+      "Ricardo SIGNES <rjbs@cpan.org>"
+   ],
+   "license" : "perl",
+   "requires" : {
+      "DateTime" : "0",
+      "HTML::Mason::Interp" : "0",
+      "Pod::Simple::XHTML" : "3.12",
+      "Pod::Elemental" : "0",
+      "Calendar::Simple" : "0",
+      "Pod::Elemental::Transformer::PPIHTML" : "0",
+      "autodie" : "0",
+      "Pod::Elemental::Transformer::VimHTML" : "0",
+      "File::Path" : "0",
+      "XML::Atom::SimpleFeed" : "0",
+      "Email::Simple" : "0",
+      "Moose" : "0.70",
+      "File::Copy" : "0",
+      "Pod::Elemental::Transformer::List" : "0",
+      "DateTime::Format::W3CDTF" : "0",
+      "Pod::Elemental::Transformer::Pod5" : "0",
+      "Path::Class" : "0",
+      "File::Basename" : "0"
+   },
+   "abstract" : "a calendar for a month of articles (on the web)"
+}
+

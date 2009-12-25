@@ -1,0 +1,60 @@
+#!perl
+use strict;
+use warnings;
+# ABSTRACT: build an advent calendar
+
+use lib 'lib';
+
+use Getopt::Long::Descriptive 0.083;
+
+=head1 USAGE
+
+  advcal [-aot] [long options...]
+    -c --config       the ini file to read for configuration
+    -a --article-dir  the root of articles
+    --share-dir       the root of shared files
+    -o --output-dir   output directory
+    --today           the day we treat as "today"; default to today
+
+    -t --tracker      include Google Analytics; -t TRACKER-ID
+
+For more detailed information, see L<WWW::AdventCalendar>.
+
+=cut
+
+my ($opt, $usage) = describe_options(
+  '%c %o',
+  [ 'config|c=s',      'the ini file to read for configuration'            ],
+  [ 'article-dir|a=s', 'root of articles',     { default => './articles' } ],
+  [ 'share-dir=s',     'root of shared files', { default => './share'    } ],
+  [ 'output-dir|o=s',  'output directory',     { default => './out'      } ],
+  [ 'today=s',         'the day we treat as "today"; default to today'     ],
+  [],
+  [ 'tracker-id|t=s',  'include Google Analytics; -t TRACKER-ID' ],
+);
+
+my $arg = {};
+if (my $file = $opt->config) {
+  die "configuration file '$file' does not exist\n" unless -f $file;
+  require WWW::AdventCalendar::Config;
+
+  my $config = WWW::AdventCalendar::Config->new->read_config({
+    filename => $file,
+    root     => '.',
+  });
+
+  my $root = $config->section_named('_');
+  $arg = $root->payload;
+}
+
+require WWW::AdventCalendar;
+require WWW::AdventCalendar::Article;
+
+my $cal = WWW::AdventCalendar->new({
+  %{ $opt },  # even command line defaults
+  %$arg,      # but those are overridden by configuration
+  %{ $opt->_specified_opts }, # which is overridden by *explicit* switches
+});
+
+$cal->build;
+
