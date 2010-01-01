@@ -15,7 +15,7 @@ requires:
   Email::Simple: 0
   File::Basename: 0
   File::Copy: 0
-  File::Path: 0
+  File::Path: 2
   HTML::Mason::Interp: 0
   Moose: 0.70
   Path::Class: 0
@@ -28,5 +28,5 @@ requires:
   XML::Atom::SimpleFeed: 0
   autodie: 0
 resources:
-  repository: origin
-version: 0.093580
+  repository: http://github.com/rjbs/www-adventcalendar
+version: 0.100010

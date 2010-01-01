@@ -1,5 +1,5 @@
 package WWW::AdventCalendar::Config;
-our $VERSION = '0.093580';
+our $VERSION = '0.100010';
 use Moose;
 extends 'Config::MVP::Reader::INI';
 # ABSTRACT: Config::MVP-based configuration reader for WWW::AdventCalendar
@@ -31,7 +31,7 @@ WWW::AdventCalendar::Config - Config::MVP-based configuration reader for WWW::Ad
 
 =head1 VERSION
 
-version 0.093580
+version 0.100010
 
 =head1 DESCRIPTION
 
@@ -49,7 +49,7 @@ Apart from that, there is nothing to say.
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2009 by Ricardo SIGNES.
+This software is copyright (c) 2010 by Ricardo SIGNES.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

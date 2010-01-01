@@ -1,5 +1,5 @@
 package WWW::AdventCalendar::Article;
-our $VERSION = '0.093580';
+our $VERSION = '0.100010';
 use Moose;
 # ABSTRACT: one article in an advent calendar
 
@@ -92,7 +92,7 @@ WWW::AdventCalendar::Article - one article in an advent calendar
 
 =head1 VERSION
 
-version 0.093580
+version 0.100010
 
 =head1 DESCRIPTION
 
@@ -134,7 +134,7 @@ builder method.
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2009 by Ricardo SIGNES.
+This software is copyright (c) 2010 by Ricardo SIGNES.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

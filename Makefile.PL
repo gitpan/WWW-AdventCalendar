@@ -11,7 +11,7 @@ WriteMakefile(
   NAME      => 'WWW::AdventCalendar',
   AUTHOR    => "Ricardo\ SIGNES\ \<rjbs\@cpan\.org\>",
   ABSTRACT  => "a\ calendar\ for\ a\ month\ of\ articles\ \(on\ the\ web\)",
-  VERSION   => '0.093580',
+  VERSION   => '0.100010',
   EXE_FILES => [ qw(bin/advcal) ],
   (eval { ExtUtils::MakeMaker->VERSION(6.31) } ? (LICENSE => 'perl') : ()),
   PREREQ_PM    => {
@@ -23,7 +23,7 @@ WriteMakefile(
     "Pod::Elemental::Transformer::PPIHTML" => '0',
     "autodie" => '0',
     "Pod::Elemental::Transformer::VimHTML" => '0',
-    "File::Path" => '0',
+    "File::Path" => '2',
     "XML::Atom::SimpleFeed" => '0',
     "Email::Simple" => '0',
     "Moose" => '0.70',

@@ -1,5 +1,5 @@
 package WWW::AdventCalendar;
-our $VERSION = '0.093580';
+our $VERSION = '0.100010';
 use Moose;
 # ABSTRACT: a calendar for a month of articles (on the web)
 
@@ -9,7 +9,7 @@ use DateTime;
 use DateTime::Format::W3CDTF;
 use Email::Simple;
 use File::Copy qw(copy);
-use File::Path qw(remove_tree);
+use File::Path 2 qw(remove_tree);
 use DateTime;
 use File::Basename;
 use HTML::Mason::Interp;
@@ -249,7 +249,7 @@ WWW::AdventCalendar - a calendar for a month of articles (on the web)
 
 =head1 VERSION
 
-version 0.093580
+version 0.100010
 
 =head1 DESCRIPTION
 
@@ -420,7 +420,7 @@ A Google Analytics tracker id.  If given, each page will include analytics.
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2009 by Ricardo SIGNES.
+This software is copyright (c) 2010 by Ricardo SIGNES.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

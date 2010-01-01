@@ -8,7 +8,7 @@ use lib '/Users/rjbs/code/hub/list-cell/lib';
 
 {
   package Calendar;
-our $VERSION = '0.093580';
+our $VERSION = '0.100010';
   use Moose;
 
   has first_cell => (
@@ -61,7 +61,7 @@ our $VERSION = '0.093580';
 
 {
   package Calendar::Cell;
-our $VERSION = '0.093580';
+our $VERSION = '0.100010';
   use Moose;
   with 'List::Cell';
 

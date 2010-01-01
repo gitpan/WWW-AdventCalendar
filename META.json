@@ -1,13 +1,13 @@
 {
    "resources" : {
-      "repository" : "origin"
+      "repository" : "http://github.com/rjbs/www-adventcalendar"
    },
    "meta-spec" : {
       "version" : 1.4,
       "url" : "http://module-build.sourceforge.net/META-spec-v1.4.html"
    },
    "generated_by" : "Dist::Zilla version 1.093400",
-   "version" : "0.093580",
+   "version" : "0.100010",
    "name" : "WWW-AdventCalendar",
    "author" : [
       "Ricardo SIGNES <rjbs@cpan.org>"
@@ -22,7 +22,7 @@
       "Pod::Elemental::Transformer::PPIHTML" : "0",
       "autodie" : "0",
       "Pod::Elemental::Transformer::VimHTML" : "0",
-      "File::Path" : "0",
+      "File::Path" : "2",
       "XML::Atom::SimpleFeed" : "0",
       "Email::Simple" : "0",
       "Moose" : "0.70",
