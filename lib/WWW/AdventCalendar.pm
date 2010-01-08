@@ -1,5 +1,5 @@
 package WWW::AdventCalendar;
-our $VERSION = '0.100010';
+our $VERSION = '0.100080';
 use Moose;
 # ABSTRACT: a calendar for a month of articles (on the web)
 
@@ -9,7 +9,7 @@ use DateTime;
 use DateTime::Format::W3CDTF;
 use Email::Simple;
 use File::Copy qw(copy);
-use File::Path 2 qw(remove_tree);
+use File::Path 2.07 qw(remove_tree);
 use DateTime;
 use File::Basename;
 use HTML::Mason::Interp;
@@ -249,7 +249,7 @@ WWW::AdventCalendar - a calendar for a month of articles (on the web)
 
 =head1 VERSION
 
-version 0.100010
+version 0.100080
 
 =head1 DESCRIPTION
 

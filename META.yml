@@ -2,7 +2,7 @@
 abstract: 'a calendar for a month of articles (on the web)'
 author:
   - 'Ricardo SIGNES <rjbs@cpan.org>'
-generated_by: 'Dist::Zilla version 1.093400'
+generated_by: 'Dist::Zilla version 1.100060'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -13,9 +13,10 @@ requires:
   DateTime: 0
   DateTime::Format::W3CDTF: 0
   Email::Simple: 0
+  ExtUtils::MakeMaker: 6.11
   File::Basename: 0
   File::Copy: 0
-  File::Path: 2
+  File::Path: 2.07
   HTML::Mason::Interp: 0
   Moose: 0.70
   Path::Class: 0
@@ -29,4 +30,4 @@ requires:
   autodie: 0
 resources:
   repository: http://github.com/rjbs/www-adventcalendar
-version: 0.100010
+version: 0.100080
