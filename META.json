@@ -2,12 +2,12 @@
    "resources" : {
       "repository" : "http://github.com/rjbs/www-adventcalendar"
    },
+   "generated_by" : "Dist::Zilla version 1.100160",
    "meta-spec" : {
       "version" : 1.4,
       "url" : "http://module-build.sourceforge.net/META-spec-v1.4.html"
    },
-   "generated_by" : "Dist::Zilla version 1.100060",
-   "version" : "0.100080",
+   "version" : "0.100160",
    "name" : "WWW-AdventCalendar",
    "author" : [
       "Ricardo SIGNES <rjbs@cpan.org>"
@@ -34,6 +34,9 @@
       "Path::Class" : "0",
       "File::Basename" : "0"
    },
-   "abstract" : "a calendar for a month of articles (on the web)"
+   "abstract" : "a calendar for a month of articles (on the web)",
+   "configure_requires" : {
+      "File::ShareDir::Install" : 0
+   }
 }
 

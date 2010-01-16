@@ -1,5 +1,5 @@
 package WWW::AdventCalendar;
-our $VERSION = '0.100080';
+our $VERSION = '0.100160';
 use Moose;
 # ABSTRACT: a calendar for a month of articles (on the web)
 
@@ -249,7 +249,7 @@ WWW::AdventCalendar - a calendar for a month of articles (on the web)
 
 =head1 VERSION
 
-version 0.100080
+version 0.100160
 
 =head1 DESCRIPTION
 
