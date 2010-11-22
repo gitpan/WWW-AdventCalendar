@@ -1,5 +1,7 @@
 package WWW::AdventCalendar::Config;
-our $VERSION = '0.100160';
+BEGIN {
+  $WWW::AdventCalendar::Config::VERSION = '1.000';
+}
 use Moose;
 extends 'Config::MVP::Reader::INI';
 # ABSTRACT: Config::MVP-based configuration reader for WWW::AdventCalendar
@@ -31,7 +33,7 @@ WWW::AdventCalendar::Config - Config::MVP-based configuration reader for WWW::Ad
 
 =head1 VERSION
 
-version 0.100160
+version 1.000
 
 =head1 DESCRIPTION
 
@@ -45,7 +47,7 @@ Apart from that, there is nothing to say.
 
 =head1 AUTHOR
 
-  Ricardo SIGNES <rjbs@cpan.org>
+Ricardo SIGNES <rjbs@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 

@@ -2,25 +2,12 @@
 use strict;
 use warnings;
 # ABSTRACT: build an advent calendar
+# PODNAME:  advcal
 
 use lib 'lib';
 
 use Getopt::Long::Descriptive 0.083;
 
-=head1 USAGE
-
-  advcal [-aot] [long options...]
-    -c --config       the ini file to read for configuration
-    -a --article-dir  the root of articles
-    --share-dir       the root of shared files
-    -o --output-dir   output directory
-    --today           the day we treat as "today"; default to today
-
-    -t --tracker      include Google Analytics; -t TRACKER-ID
-
-For more detailed information, see L<WWW::AdventCalendar>.
-
-=cut
 
 my ($opt, $usage) = describe_options(
   '%c %o',
@@ -38,10 +25,7 @@ if (my $file = $opt->config) {
   die "configuration file '$file' does not exist\n" unless -f $file;
   require WWW::AdventCalendar::Config;
 
-  my $config = WWW::AdventCalendar::Config->new->read_config({
-    filename => $file,
-    root     => '.',
-  });
+  my $config = WWW::AdventCalendar::Config->new->read_config($file);
 
   my $root = $config->section_named('_');
   $arg = $root->payload;
@@ -57,4 +41,42 @@ my $cal = WWW::AdventCalendar->new({
 });
 
 $cal->build;
+
+
+__END__
+=pod
+
+=head1 NAME
+
+advcal - build an advent calendar
+
+=head1 VERSION
+
+version 1.000
+
+=head1 USAGE
+
+  advcal [-aot] [long options...]
+    -c --config       the ini file to read for configuration
+    -a --article-dir  the root of articles
+    --share-dir       the root of shared files
+    -o --output-dir   output directory
+    --today           the day we treat as "today"; default to today
+
+    -t --tracker      include Google Analytics; -t TRACKER-ID
+
+For more detailed information, see L<WWW::AdventCalendar>.
+
+=head1 AUTHOR
+
+Ricardo SIGNES <rjbs@cpan.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2010 by Ricardo SIGNES.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut
 

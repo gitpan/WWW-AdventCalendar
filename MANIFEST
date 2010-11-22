@@ -21,5 +21,4 @@ share/templates/calendar.mhtml
 share/templates/page.mhtml
 share/templates/patience.mhtml
 t/00-compile.t
-t/release-pod-coverage.t
 t/release-pod-syntax.t

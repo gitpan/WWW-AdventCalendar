@@ -1,5 +1,7 @@
 package WWW::AdventCalendar;
-our $VERSION = '0.100160';
+BEGIN {
+  $WWW::AdventCalendar::VERSION = '1.000';
+}
 use Moose;
 # ABSTRACT: a calendar for a month of articles (on the web)
 
@@ -120,7 +122,7 @@ sub build {
     $self->output_dir->file("index.html")->openw->print(
       $self->_masonize('/patience.mhtml', {
         days => $str,
-        year => $self->today->year,
+        year => $self->year,
       }),
     );
 
@@ -158,7 +160,7 @@ sub build {
       today  => $self->today,
       year   => $self->year,
       month  => \%dec,
-      calendar => scalar calendar(12, $self->today->year),
+      calendar => scalar calendar(12, $self->year),
       articles => $article,
     }),
   );
@@ -176,7 +178,7 @@ sub build {
         date    => $date,
         next    => ($i < $#dates ? $article->{ $dates[ $i + 1 ] } : undef),
         prev    => ($i > 0       ? $article->{ $dates[ $i - 1 ] } : undef),
-        year    => $self->today->year,
+        year    => $self->year,
       }),
     );
   }
@@ -249,7 +251,7 @@ WWW::AdventCalendar - a calendar for a month of articles (on the web)
 
 =head1 VERSION
 
-version 0.100160
+version 1.000
 
 =head1 DESCRIPTION
 
@@ -416,7 +418,7 @@ A Google Analytics tracker id.  If given, each page will include analytics.
 
 =head1 AUTHOR
 
-  Ricardo SIGNES <rjbs@cpan.org>
+Ricardo SIGNES <rjbs@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
