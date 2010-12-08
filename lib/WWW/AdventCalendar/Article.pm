@@ -1,6 +1,6 @@
 package WWW::AdventCalendar::Article;
 BEGIN {
-  $WWW::AdventCalendar::Article::VERSION = '1.000';
+  $WWW::AdventCalendar::Article::VERSION = '1.001';
 }
 use Moose;
 # ABSTRACT: one article in an advent calendar
@@ -40,6 +40,8 @@ sub _build_body_html {
   my ($self) = @_;
 
   my $body = $self->body;
+
+  $body = "\n=encoding utf-8\n\n$body" unless $body =~ /^=encoding/s;
 
   my $document = Pod::Elemental->read_string($body);
 
@@ -94,7 +96,7 @@ WWW::AdventCalendar::Article - one article in an advent calendar
 
 =head1 VERSION
 
-version 1.000
+version 1.001
 
 =head1 DESCRIPTION
 

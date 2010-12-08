@@ -41,7 +41,7 @@ requires:
   autodie: 0
 resources:
   repository: git://git.codesimply.com/WWW-AdventCalendar.git
-version: 1.000
+version: 1.001
 x_Dist_Zilla:
   plugins:
     -
