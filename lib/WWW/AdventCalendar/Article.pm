@@ -1,6 +1,6 @@
 package WWW::AdventCalendar::Article;
 BEGIN {
-  $WWW::AdventCalendar::Article::VERSION = '1.001';
+  $WWW::AdventCalendar::Article::VERSION = '1.002';
 }
 use Moose;
 # ABSTRACT: one article in an advent calendar
@@ -61,6 +61,7 @@ sub _build_body_html {
   $body = $document->as_pod_string;
 
   my $parser = Pod::Simple::XHTML->new;
+  $parser->perldoc_url_prefix('https://metacpan.org/module/');
   $parser->output_string(\my $html);
   $parser->html_h_level(2);
   $parser->html_header('');
@@ -96,7 +97,7 @@ WWW::AdventCalendar::Article - one article in an advent calendar
 
 =head1 VERSION
 
-version 1.001
+version 1.002
 
 =head1 DESCRIPTION
 
@@ -138,7 +139,7 @@ Ricardo SIGNES <rjbs@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2010 by Ricardo SIGNES.
+This software is copyright (c) 2011 by Ricardo SIGNES.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

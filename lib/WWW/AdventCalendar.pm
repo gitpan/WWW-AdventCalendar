@@ -1,6 +1,6 @@
 package WWW::AdventCalendar;
 BEGIN {
-  $WWW::AdventCalendar::VERSION = '1.001';
+  $WWW::AdventCalendar::VERSION = '1.002';
 }
 use Moose;
 # ABSTRACT: a calendar for a month of articles (on the web)
@@ -252,7 +252,7 @@ WWW::AdventCalendar - a calendar for a month of articles (on the web)
 
 =head1 VERSION
 
-version 1.001
+version 1.002
 
 =head1 DESCRIPTION
 
@@ -423,7 +423,7 @@ Ricardo SIGNES <rjbs@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2010 by Ricardo SIGNES.
+This software is copyright (c) 2011 by Ricardo SIGNES.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
