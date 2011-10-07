@@ -11,50 +11,55 @@ install_share dist => "share";
 
 
 my %WriteMakefileArgs = (
-  'ABSTRACT' => 'a calendar for a month of articles (on the web)',
-  'AUTHOR' => 'Ricardo SIGNES <rjbs@cpan.org>',
-  'BUILD_REQUIRES' => {
-    'Test::More' => '0.96'
+  "ABSTRACT" => "a calendar for a month of articles (on the web)",
+  "AUTHOR" => "Ricardo SIGNES <rjbs\@cpan.org>",
+  "BUILD_REQUIRES" => {
+    "Test::More" => "0.96"
   },
-  'CONFIGURE_REQUIRES' => {
-    'ExtUtils::MakeMaker' => '6.30',
-    'File::ShareDir::Install' => '0.03'
+  "CONFIGURE_REQUIRES" => {
+    "ExtUtils::MakeMaker" => "6.30",
+    "File::ShareDir::Install" => "0.03"
   },
-  'DISTNAME' => 'WWW-AdventCalendar',
-  'EXE_FILES' => [
-    'bin/advcal'
+  "DISTNAME" => "WWW-AdventCalendar",
+  "EXE_FILES" => [
+    "bin/advcal"
   ],
-  'LICENSE' => 'perl',
-  'NAME' => 'WWW::AdventCalendar',
-  'PREREQ_PM' => {
-    'Calendar::Simple' => '0',
-    'Config::MVP' => '2',
-    'Config::MVP::Assembler' => '0',
-    'Config::MVP::Reader::INI' => '0',
-    'DateTime' => '0',
-    'DateTime::Format::W3CDTF' => '0',
-    'Email::Simple' => '0',
-    'File::Basename' => '0',
-    'File::Copy' => '0',
-    'File::Path' => '2.07',
-    'Getopt::Long::Descriptive' => '0.083',
-    'HTML::Mason::Interp' => '0',
-    'Moose' => '0.70',
-    'Path::Class' => '0',
-    'Pod::Elemental' => '0',
-    'Pod::Elemental::Transformer::Codebox' => '0',
-    'Pod::Elemental::Transformer::List' => '0',
-    'Pod::Elemental::Transformer::PPIHTML' => '0',
-    'Pod::Elemental::Transformer::Pod5' => '0',
-    'Pod::Elemental::Transformer::SynMux' => '0',
-    'Pod::Elemental::Transformer::VimHTML' => '0',
-    'Pod::Simple::XHTML' => '3.13',
-    'XML::Atom::SimpleFeed' => '0',
-    'autodie' => '0'
+  "LICENSE" => "perl",
+  "NAME" => "WWW::AdventCalendar",
+  "PREREQ_PM" => {
+    "Calendar::Simple" => 0,
+    "Config::MVP" => 2,
+    "Config::MVP::Assembler" => 0,
+    "Config::MVP::Reader::INI" => 0,
+    "DateTime" => 0,
+    "DateTime::Format::W3CDTF" => 0,
+    "Email::Simple" => 0,
+    "File::Basename" => 0,
+    "File::Copy" => 0,
+    "File::Path" => "2.07",
+    "File::ShareDir" => 0,
+    "Getopt::Long::Descriptive" => "0.083",
+    "HTML::Mason::Interp" => 0,
+    "Moose" => "0.70",
+    "Moose::Util::TypeConstraints" => 0,
+    "Path::Class" => 0,
+    "Pod::Elemental" => 0,
+    "Pod::Elemental::Transformer::Codebox" => 0,
+    "Pod::Elemental::Transformer::List" => 0,
+    "Pod::Elemental::Transformer::PPIHTML" => 0,
+    "Pod::Elemental::Transformer::Pod5" => 0,
+    "Pod::Elemental::Transformer::SynMux" => 0,
+    "Pod::Elemental::Transformer::VimHTML" => 0,
+    "Pod::Simple::XHTML" => "3.13",
+    "XML::Atom::SimpleFeed" => 0,
+    "autodie" => 0,
+    "namespace::autoclean" => 0,
+    "strict" => 0,
+    "warnings" => 0
   },
-  'VERSION' => '1.002',
-  'test' => {
-    'TESTS' => 't/*.t'
+  "VERSION" => "1.100",
+  "test" => {
+    "TESTS" => "t/*.t"
   }
 );
 

@@ -1,34 +1,71 @@
 package WWW::AdventCalendar;
-BEGIN {
-  $WWW::AdventCalendar::VERSION = '1.002';
+{
+  $WWW::AdventCalendar::VERSION = '1.100';
 }
 use Moose;
 # ABSTRACT: a calendar for a month of articles (on the web)
 
 use autodie;
 use Calendar::Simple;
-use DateTime;
 use DateTime::Format::W3CDTF;
+use DateTime;
+use DateTime;
 use Email::Simple;
+use File::Basename;
 use File::Copy qw(copy);
 use File::Path 2.07 qw(remove_tree);
-use DateTime;
-use File::Basename;
+use File::ShareDir;
 use HTML::Mason::Interp;
+use Moose::Util::TypeConstraints;
 use Path::Class ();
-use XML::Atom::SimpleFeed;
 use WWW::AdventCalendar::Article;
+use XML::Atom::SimpleFeed;
+
+use namespace::autoclean;
 
 
 has title  => (is => 'ro', required => 1);
 has uri    => (is => 'ro', required => 1);
 has editor => (is => 'ro', required => 1);
-has year   => (is => 'ro', required => 1);
+has subtitle   => (is => 'ro', predicate => 'has_subtitle');
 has categories => (is => 'ro', default => sub { [ qw() ] });
 
 has article_dir => (is => 'rw', required => 1);
 has share_dir   => (is => 'rw', required => 1);
 has output_dir  => (is => 'rw', required => 1);
+
+has year       => (
+  is   => 'ro',
+  lazy => 1,
+  default => sub {
+    my ($self) = @_;
+    return $self->start_date->year if $self->_has_start_date;
+    return $self->end_date->year   if $self->_has_end_date;
+
+    return (localtime)[5] + 1900;
+  },
+);
+
+class_type('DateTimeObject', { class => 'DateTime' });
+coerce  'DateTimeObject', from 'Str', via \&_parse_isodate;
+
+has start_date => (
+  is   => 'ro',
+  isa  => 'DateTimeObject',
+  lazy => 1,
+  coerce  => 1,
+  default => sub { DateTime->new(year => $_[0]->year, month => 12, day => 1) },
+  predicate => '_has_start_date',
+);
+
+has end_date => (
+  is   => 'ro',
+  isa  => 'DateTimeObject',
+  lazy => 1,
+  coerce  => 1,
+  default => sub { DateTime->new(year => $_[0]->year, month => 12, day => 24) },
+  predicate => '_has_end_date',
+);
 
 has today      => (is => 'rw');
 
@@ -40,11 +77,23 @@ sub _masonize {
   my $str = '';
 
   my $interp = HTML::Mason::Interp->new(
-    comp_root  => $self->share_dir->subdir('templates')->absolute->stringify,
+    comp_root  => [
+      [ user  => $self->share_dir->subdir('templates')->absolute->stringify ],
+      [ stock => Path::Class::dir(
+          File::ShareDir::dist_dir('WWW-AdventCalendar') )
+          ->subdir('templates')->absolute->stringify
+      ],
+    ],
     out_method => \$str,
+    allow_globals => [ '$calendar' ],
   );
 
-  $interp->exec($comp, tracker_id => $self->tracker_id, %$args);
+  $interp->set_global('$calendar', $self);
+
+  $interp->exec($comp,
+    tracker_id => $self->tracker_id,
+    %$args
+  );
 
   return $str;
 }
@@ -77,6 +126,13 @@ sub BUILD {
     : DateTime->now(time_zone => 'local')
   );
 
+  confess "start_date, end_date, and year do not all agree"
+    unless $self->year == $self->start_date->year
+    and    $self->year == $self->end_date->year;
+
+  confess "range from start_date to end_date must not cross a month boundary"
+    if $self->start_date->month != $self->end_date->month;
+
   for (map { "$_\_dir" } qw(article output share)) {
     $self->$_( Path::Class::Dir->new($self->$_) );
   }
@@ -104,19 +160,24 @@ sub build {
     author  => $self->editor,
   );
 
-  my %dec;
-  for (1 .. 31) {
-    $dec{$_} = DateTime->new(
+  my %month;
+  for (
+    1 .. DateTime->last_day_of_month(
       year  => $self->year,
-      month => 12,
+      month => $self->start_date->month
+    )->day
+  ) {
+    $month{$_} = DateTime->new(
+      year  => $self->year,
+      month => $self->start_date->month,
       day   => $_,
       time_zone => 'local',
     );
   }
 
-  if ($dec{1} > $self->today) {
-    my $dur  = $dec{1} - $self->today;
-    my $days = $dur->delta_days + 1;
+  if ($self->start_date > $self->today) {
+    my $dur  = $self->start_date->subtract_datetime_absolute( $self->today );
+    my $days = int($dur->delta_seconds / 86_400  +  1);
     my $str  = $days != 1 ? "$days days" : "1 day";
 
     $self->output_dir->file("index.html")->openw->print(
@@ -144,9 +205,9 @@ sub build {
   my $article = $self->read_articles;
 
   {
-    my $d = $dec{1};
+    my $d = $month{1};
     while (
-      $d->ymd le (sort { $a cmp $b } ($dec{26}->ymd, $self->today->ymd))[0]
+      $d->ymd le (sort { $a cmp $b } ($self->end_date->ymd, $self->today->ymd))[0]
     ) {
       warn "no article written for " . $d->ymd . "!\n"
         unless $article->{ $d->ymd };
@@ -159,7 +220,7 @@ sub build {
     $self->_masonize('/calendar.mhtml', {
       today  => $self->today,
       year   => $self->year,
-      month  => \%dec,
+      month  => \%month,
       calendar => scalar calendar(12, $self->year),
       articles => $article,
     }),
@@ -252,7 +313,7 @@ WWW::AdventCalendar - a calendar for a month of articles (on the web)
 
 =head1 VERSION
 
-version 1.002
+version 1.100
 
 =head1 DESCRIPTION
 
@@ -263,15 +324,15 @@ makes four things:
 
 =item *
 
-a page saying "first door opens in X days" until Dec 1
+a page saying "first door opens in X days" the calendar starts
 
 =item *
 
-a calendar page on and after Dec 1
+a calendar page on and after the calendar starts
 
 =item *
 
-a page for each day in December with an article
+a page for each day in the month with an article
 
 =item *
 
@@ -279,9 +340,11 @@ an Atom feed
 
 =back
 
-This library may be generalized somewhat in the future.  Until then, it should
-work for at least December for every year.  It has only been tested for 2009,
-which may be of limited utility going forward.
+This library was originally written just for RJBS's Perl Advent Calendar, so it
+assumed you'd always be publishing from Dec 1 to Dec 24 or so.  It has recently
+been retooled to work across arbitrary ranges, as long as they're within one
+month.  This feature isn't well tested.  Neither is the rest of the code, to be
+perfectly honest, though...
 
 =head1 OVERVIEW
 
@@ -320,7 +383,7 @@ These should all be self-explanatory.  Only C<category> can be provided more
 than once, and is used for the category listing in the Atom feed.
 
 These settings all correspond to L<calendar attributes/ATTRIBUTES> described
-below.
+below.  A few settings below are not given above.
 
 Articles are easy, too.  They're just files in the C<article_dir>.  They begin
 with an email-like set of headers, followed by a body written in Pod.  For
@@ -378,6 +441,10 @@ L<WWW::AdventCalendar::Article> objects.
 
 The title of the calendar, to be used in headers, the feed, and so on.
 
+=item subtitle
+
+A sub-title for the calendar, used in some templates.  Optional.
+
 =item uri
 
 The base URI of the calendar, including trailing slash.
@@ -388,7 +455,15 @@ The name of the calendar's editor, used in the feed.
 
 =item year
 
-The year being calendared.
+The calendar year.  Optional, if you provide C<start_date> and C<end_date>.
+
+=item start_date
+
+The start of the article-containing period.  Defaults to Dec 1 of the year.
+
+=item end_date
+
+The end of the article-containing period.  Defaults to Dec 24 of the year.
 
 =item categories
 

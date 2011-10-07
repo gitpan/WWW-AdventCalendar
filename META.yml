@@ -8,7 +8,7 @@ configure_requires:
   ExtUtils::MakeMaker: 6.30
   File::ShareDir::Install: 0.03
 dynamic_config: 0
-generated_by: 'Dist::Zilla version 4.200011, CPAN::Meta::Converter version 2.110930001'
+generated_by: 'Dist::Zilla version 4.300002, CPAN::Meta::Converter version 2.112621'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -25,9 +25,11 @@ requires:
   File::Basename: 0
   File::Copy: 0
   File::Path: 2.07
+  File::ShareDir: 0
   Getopt::Long::Descriptive: 0.083
   HTML::Mason::Interp: 0
   Moose: 0.70
+  Moose::Util::TypeConstraints: 0
   Path::Class: 0
   Pod::Elemental: 0
   Pod::Elemental::Transformer::Codebox: 0
@@ -39,10 +41,13 @@ requires:
   Pod::Simple::XHTML: 3.13
   XML::Atom::SimpleFeed: 0
   autodie: 0
+  namespace::autoclean: 0
+  strict: 0
+  warnings: 0
 resources:
-  homepage: http://github.com/rjbs/www-adventcalendar
-  repository: http://github.com/rjbs/www-adventcalendar
-version: 1.002
+  homepage: https://github.com/rjbs/www-adventcalendar
+  repository: https://github.com/rjbs/www-adventcalendar.git
+version: 1.100
 x_Dist_Zilla:
   plugins:
     -
@@ -52,95 +57,95 @@ x_Dist_Zilla:
           phase: runtime
           type: requires
       name: Prereqs
-      version: 4.200011
+      version: 4.300002
     -
       class: Dist::Zilla::Plugin::CheckPrereqsIndexed
       name: '@RJBS/CheckPrereqsIndexed'
-      version: 0.003
+      version: 0.005
     -
       class: Dist::Zilla::Plugin::GatherDir
       name: '@RJBS/@Basic/GatherDir'
-      version: 4.200011
+      version: 4.300002
     -
       class: Dist::Zilla::Plugin::PruneCruft
       name: '@RJBS/@Basic/PruneCruft'
-      version: 4.200011
+      version: 4.300002
     -
       class: Dist::Zilla::Plugin::ManifestSkip
       name: '@RJBS/@Basic/ManifestSkip'
-      version: 4.200011
+      version: 4.300002
     -
       class: Dist::Zilla::Plugin::MetaYAML
       name: '@RJBS/@Basic/MetaYAML'
-      version: 4.200011
+      version: 4.300002
     -
       class: Dist::Zilla::Plugin::License
       name: '@RJBS/@Basic/License'
-      version: 4.200011
+      version: 4.300002
     -
       class: Dist::Zilla::Plugin::Readme
       name: '@RJBS/@Basic/Readme'
-      version: 4.200011
+      version: 4.300002
     -
       class: Dist::Zilla::Plugin::ExtraTests
       name: '@RJBS/@Basic/ExtraTests'
-      version: 4.200011
+      version: 4.300002
     -
       class: Dist::Zilla::Plugin::ExecDir
       name: '@RJBS/@Basic/ExecDir'
-      version: 4.200011
+      version: 4.300002
     -
       class: Dist::Zilla::Plugin::ShareDir
       name: '@RJBS/@Basic/ShareDir'
-      version: 4.200011
+      version: 4.300002
     -
       class: Dist::Zilla::Plugin::MakeMaker
       name: '@RJBS/@Basic/MakeMaker'
-      version: 4.200011
+      version: 4.300002
     -
       class: Dist::Zilla::Plugin::Manifest
       name: '@RJBS/@Basic/Manifest'
-      version: 4.200011
+      version: 4.300002
     -
       class: Dist::Zilla::Plugin::TestRelease
       name: '@RJBS/@Basic/TestRelease'
-      version: 4.200011
+      version: 4.300002
     -
       class: Dist::Zilla::Plugin::ConfirmRelease
       name: '@RJBS/@Basic/ConfirmRelease'
-      version: 4.200011
+      version: 4.300002
     -
       class: Dist::Zilla::Plugin::UploadToCPAN
       name: '@RJBS/@Basic/UploadToCPAN'
-      version: 4.200011
+      version: 4.300002
     -
       class: Dist::Zilla::Plugin::AutoPrereqs
       name: '@RJBS/AutoPrereqs'
-      version: 4.200011
+      version: 4.300002
     -
       class: Dist::Zilla::Plugin::Git::NextVersion
       name: '@RJBS/Git::NextVersion'
-      version: 1.111590
+      version: 1.112510
     -
       class: Dist::Zilla::Plugin::PkgVersion
       name: '@RJBS/PkgVersion'
-      version: 4.200011
+      version: 4.300002
     -
       class: Dist::Zilla::Plugin::MetaConfig
       name: '@RJBS/MetaConfig'
-      version: 4.200011
+      version: 4.300002
     -
       class: Dist::Zilla::Plugin::MetaJSON
       name: '@RJBS/MetaJSON'
-      version: 4.200011
+      version: 4.300002
     -
       class: Dist::Zilla::Plugin::NextRelease
       name: '@RJBS/NextRelease'
-      version: 4.200011
+      version: 4.300002
     -
       class: Dist::Zilla::Plugin::PodSyntaxTests
       name: '@RJBS/PodSyntaxTests'
-      version: 4.200011
+      version: 4.300002
     -
       class: Dist::Zilla::Plugin::Repository
       name: '@RJBS/Repository'
@@ -152,7 +157,7 @@ x_Dist_Zilla:
           phase: test
           type: requires
       name: '@RJBS/TestMoreWithSubtests'
-      version: 4.200011
+      version: 4.300002
     -
       class: Dist::Zilla::Plugin::PodWeaver
       name: '@RJBS/PodWeaver'
@@ -160,49 +165,49 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::GithubMeta
       name: '@RJBS/GithubMeta'
-      version: 0.14
+      version: 0.20
     -
       class: Dist::Zilla::Plugin::Git::Check
       name: '@RJBS/@Git/Check'
-      version: 1.111590
+      version: 1.112510
     -
       class: Dist::Zilla::Plugin::Git::Commit
       name: '@RJBS/@Git/Commit'
-      version: 1.111590
+      version: 1.112510
     -
       class: Dist::Zilla::Plugin::Git::Tag
       name: '@RJBS/@Git/Tag'
-      version: 1.111590
+      version: 1.112510
     -
       class: Dist::Zilla::Plugin::Git::Push
       name: '@RJBS/@Git/Push'
-      version: 1.111590
+      version: 1.112510
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':InstallModules'
-      version: 4.200011
+      version: 4.300002
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':IncModules'
-      version: 4.200011
+      version: 4.300002
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':TestFiles'
-      version: 4.200011
+      version: 4.300002
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':ExecFiles'
-      version: 4.200011
+      version: 4.300002
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':ShareFiles'
-      version: 4.200011
+      version: 4.300002
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':MainModule'
-      version: 4.200011
+      version: 4.300002
   zilla:
     class: Dist::Zilla::Dist::Builder
     config:
       is_trial: 0
-    version: 4.200011
+    version: 4.300002
