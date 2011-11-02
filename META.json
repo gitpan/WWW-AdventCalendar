@@ -23,6 +23,7 @@
       "runtime" : {
          "requires" : {
             "Calendar::Simple" : 0,
+            "Color::Palette" : "0.100000",
             "Config::MVP" : "2",
             "Config::MVP::Assembler" : 0,
             "Config::MVP::Reader::INI" : 0,
@@ -37,6 +38,7 @@
             "HTML::Mason::Interp" : 0,
             "Moose" : "0.70",
             "Moose::Util::TypeConstraints" : 0,
+            "MooseX::StrictConstructor" : 0,
             "Path::Class" : 0,
             "Pod::Elemental" : 0,
             "Pod::Elemental::Transformer::Codebox" : 0,
@@ -68,7 +70,7 @@
          "web" : "https://github.com/rjbs/www-adventcalendar"
       }
    },
-   "version" : "1.100",
+   "version" : "1.101",
    "x_Dist_Zilla" : {
       "plugins" : [
          {
@@ -216,7 +218,7 @@
          {
             "class" : "Dist::Zilla::Plugin::GithubMeta",
             "name" : "@RJBS/GithubMeta",
-            "version" : "0.20"
+            "version" : "0.22"
          },
          {
             "class" : "Dist::Zilla::Plugin::Git::Check",

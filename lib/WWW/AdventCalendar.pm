@@ -1,9 +1,11 @@
 package WWW::AdventCalendar;
 {
-  $WWW::AdventCalendar::VERSION = '1.100';
+  $WWW::AdventCalendar::VERSION = '1.101';
 }
 use Moose;
 # ABSTRACT: a calendar for a month of articles (on the web)
+
+use MooseX::StrictConstructor;
 
 use autodie;
 use Calendar::Simple;
@@ -27,7 +29,7 @@ use namespace::autoclean;
 has title  => (is => 'ro', required => 1);
 has uri    => (is => 'ro', required => 1);
 has editor => (is => 'ro', required => 1);
-has subtitle   => (is => 'ro', predicate => 'has_subtitle');
+has tagline => (is => 'ro', predicate => 'has_tagline');
 has categories => (is => 'ro', default => sub { [ qw() ] });
 
 has article_dir => (is => 'rw', required => 1);
@@ -46,12 +48,12 @@ has year       => (
   },
 );
 
-class_type('DateTimeObject', { class => 'DateTime' });
-coerce  'DateTimeObject', from 'Str', via \&_parse_isodate;
+class_type('DateTime', { class => 'DateTime' });
+coerce  'DateTime', from 'Str', via \&_parse_isodate;
 
 has start_date => (
   is   => 'ro',
-  isa  => 'DateTimeObject',
+  isa  => 'DateTime',
   lazy => 1,
   coerce  => 1,
   default => sub { DateTime->new(year => $_[0]->year, month => 12, day => 1) },
@@ -60,7 +62,7 @@ has start_date => (
 
 has end_date => (
   is   => 'ro',
-  isa  => 'DateTimeObject',
+  isa  => 'DateTime',
   lazy => 1,
   coerce  => 1,
   default => sub { DateTime->new(year => $_[0]->year, month => 12, day => 24) },
@@ -70,6 +72,14 @@ has end_date => (
 has today      => (is => 'rw');
 
 has tracker_id => (is => 'ro');
+
+class_type('Color::Palette', { class => 'Color::Palette' });
+
+has color_palette => (
+  is  => 'ro',
+  isa => 'Color::Palette',
+  required => 1,
+);
 
 sub _masonize {
   my ($self, $comp, $args) = @_;
@@ -149,6 +159,12 @@ sub build {
   copy "$_" => $self->output_dir
     for grep { ! $_->is_dir } $self->share_dir->subdir('static')->children;
 
+  $self->output_dir->file("style.css")->openw->print(
+    $self->_masonize('/style.css', {
+      color => $self->color_palette->as_css_hash,
+    }),
+  );
+
   my $feed = XML::Atom::SimpleFeed->new(
     title   => $self->title,
     id      => $self->uri,
@@ -210,7 +226,7 @@ sub build {
       $d->ymd le (sort { $a cmp $b } ($self->end_date->ymd, $self->today->ymd))[0]
     ) {
       warn "no article written for " . $d->ymd . "!\n"
-        unless $article->{ $d->ymd };
+        if $d >= $self->start_date && ! $article->{ $d->ymd };
 
       $d = $d + DateTime::Duration->new(days => 1 );
     }
@@ -313,7 +329,7 @@ WWW::AdventCalendar - a calendar for a month of articles (on the web)
 
 =head1 VERSION
 
-version 1.100
+version 1.101
 
 =head1 DESCRIPTION
 
@@ -441,9 +457,9 @@ L<WWW::AdventCalendar::Article> objects.
 
 The title of the calendar, to be used in headers, the feed, and so on.
 
-=item subtitle
+=item tagline
 
-A sub-title for the calendar, used in some templates.  Optional.
+A tagline for the calendar, used in some templates.  Optional.
 
 =item uri
 

@@ -1,16 +1,33 @@
 package WWW::AdventCalendar::Config;
 {
-  $WWW::AdventCalendar::Config::VERSION = '1.100';
+  $WWW::AdventCalendar::Config::VERSION = '1.101';
 }
 use Moose;
 extends 'Config::MVP::Reader::INI';
 # ABSTRACT: Config::MVP-based configuration reader for WWW::AdventCalendar
 
+use namespace::autoclean;
+
 
 use Config::MVP::Assembler;
 
+{
+  package
+    WWW::AdventCalendar::Config::Assembler;
+  use Moose;
+  extends 'Config::MVP::Assembler';
+  use namespace::autoclean;
+  sub expand_package { return undef }
+}
+
+{
+  package
+    WWW::AdventCalendar::Config::Palette;
+  $INC{'WWW/AdventCalendar/Config/Palette.pm'} = 1;
+}
+
 sub build_assembler {
-  my $assembler = Config::MVP::Assembler->new;
+  my $assembler = WWW::AdventCalendar::Config::Assembler->new;
 
   my $section = $assembler->section_class->new({
     name => '_',
@@ -33,7 +50,7 @@ WWW::AdventCalendar::Config - Config::MVP-based configuration reader for WWW::Ad
 
 =head1 VERSION
 
-version 1.100
+version 1.101
 
 =head1 DESCRIPTION
 

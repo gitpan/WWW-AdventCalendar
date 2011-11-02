@@ -12,13 +12,10 @@ lib/WWW/AdventCalendar/Article.pm
 lib/WWW/AdventCalendar/Config.pm
 misc/calendar.pl
 share/static/favicon.ico
-share/static/feedicon.png
-share/static/ppi-html.css
-share/static/screen.css
-share/static/vim-html.css
 share/templates/article.mhtml
 share/templates/calendar.mhtml
 share/templates/page.mhtml
 share/templates/patience.mhtml
+share/templates/style.css
 t/00-compile.t
 t/release-pod-syntax.t

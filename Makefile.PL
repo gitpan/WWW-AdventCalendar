@@ -28,6 +28,7 @@ my %WriteMakefileArgs = (
   "NAME" => "WWW::AdventCalendar",
   "PREREQ_PM" => {
     "Calendar::Simple" => 0,
+    "Color::Palette" => "0.100000",
     "Config::MVP" => 2,
     "Config::MVP::Assembler" => 0,
     "Config::MVP::Reader::INI" => 0,
@@ -42,6 +43,7 @@ my %WriteMakefileArgs = (
     "HTML::Mason::Interp" => 0,
     "Moose" => "0.70",
     "Moose::Util::TypeConstraints" => 0,
+    "MooseX::StrictConstructor" => 0,
     "Path::Class" => 0,
     "Pod::Elemental" => 0,
     "Pod::Elemental::Transformer::Codebox" => 0,
@@ -57,7 +59,7 @@ my %WriteMakefileArgs = (
     "strict" => 0,
     "warnings" => 0
   },
-  "VERSION" => "1.100",
+  "VERSION" => "1.101",
   "test" => {
     "TESTS" => "t/*.t"
   }
