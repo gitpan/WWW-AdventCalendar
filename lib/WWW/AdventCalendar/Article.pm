@@ -1,6 +1,6 @@
 package WWW::AdventCalendar::Article;
 {
-  $WWW::AdventCalendar::Article::VERSION = '1.101';
+  $WWW::AdventCalendar::Article::VERSION = '1.102';
 }
 use Moose;
 # ABSTRACT: one article in an advent calendar
@@ -18,7 +18,7 @@ use Pod::Simple::XHTML 3.13;
 
 
 has date => (is => 'ro', isa => 'DateTime', required => 1);
-has [ qw(title package body) ] => (is => 'ro', isa => 'Str', required => 1);
+has [ qw(title topic body) ] => (is => 'ro', isa => 'Str', required => 1);
 
 
 has calendar => (
@@ -97,7 +97,7 @@ WWW::AdventCalendar::Article - one article in an advent calendar
 
 =head1 VERSION
 
-version 1.101
+version 1.102
 
 =head1 DESCRIPTION
 
@@ -115,10 +115,10 @@ This is the date (a DateTime object) on which the article is to be published.
 
 This is the title of the article.
 
-=head2 package
+=head2 topic
 
-This is the Perl package that the article describes.  This attribute is
-required, for now, but may become optional in the future.
+This is the topic of the article.  This attribute is required, for now, but may
+become optional in the future.
 
 =head2 body
 

@@ -51,7 +51,7 @@ my %WriteMakefileArgs = (
     "Pod::Elemental::Transformer::PPIHTML" => 0,
     "Pod::Elemental::Transformer::Pod5" => 0,
     "Pod::Elemental::Transformer::SynMux" => 0,
-    "Pod::Elemental::Transformer::VimHTML" => 0,
+    "Pod::Elemental::Transformer::VimHTML" => "0.093581",
     "Pod::Simple::XHTML" => "3.13",
     "XML::Atom::SimpleFeed" => 0,
     "autodie" => 0,
@@ -59,7 +59,7 @@ my %WriteMakefileArgs = (
     "strict" => 0,
     "warnings" => 0
   },
-  "VERSION" => "1.101",
+  "VERSION" => "1.102",
   "test" => {
     "TESTS" => "t/*.t"
   }
