@@ -49,7 +49,7 @@ requires:
 resources:
   homepage: https://github.com/rjbs/www-adventcalendar
   repository: https://github.com/rjbs/www-adventcalendar.git
-version: 1.102
+version: 1.103
 x_Dist_Zilla:
   plugins:
     -
@@ -63,7 +63,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::CheckPrereqsIndexed
       name: '@RJBS/CheckPrereqsIndexed'
-      version: 0.005
+      version: 0.007
     -
       class: Dist::Zilla::Plugin::GatherDir
       name: '@RJBS/@Basic/GatherDir'

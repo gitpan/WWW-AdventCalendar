@@ -70,7 +70,7 @@
          "web" : "https://github.com/rjbs/www-adventcalendar"
       }
    },
-   "version" : "1.102",
+   "version" : "1.103",
    "x_Dist_Zilla" : {
       "plugins" : [
          {
@@ -87,7 +87,7 @@
          {
             "class" : "Dist::Zilla::Plugin::CheckPrereqsIndexed",
             "name" : "@RJBS/CheckPrereqsIndexed",
-            "version" : "0.005"
+            "version" : "0.007"
          },
          {
             "class" : "Dist::Zilla::Plugin::GatherDir",

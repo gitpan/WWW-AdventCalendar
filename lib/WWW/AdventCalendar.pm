@@ -1,6 +1,6 @@
 package WWW::AdventCalendar;
 {
-  $WWW::AdventCalendar::VERSION = '1.102';
+  $WWW::AdventCalendar::VERSION = '1.103';
 }
 use Moose;
 # ABSTRACT: a calendar for a month of articles (on the web)
@@ -35,6 +35,12 @@ has categories => (is => 'ro', default => sub { [ qw() ] });
 has article_dir => (is => 'rw', required => 1);
 has share_dir   => (is => 'rw', required => 1);
 has output_dir  => (is => 'rw', required => 1);
+
+has default_author => (
+  is  => 'ro',
+  isa => 'Maybe[Str]', # should be using UndefTolerant instead!
+                       # -- rjbs, 2011-11-08
+);
 
 has year       => (
   is   => 'ro',
@@ -271,6 +277,8 @@ sub build {
       summary   => $article->body_html,
       updated   => $self->_w3cdtf($article->date),
       (map {; category => $_ } @{ $self->categories }),
+
+      contributor => { name => $article->author },
     );
   }
 
@@ -300,10 +308,12 @@ sub read_articles {
     die "no title set in $file\n" unless $document->header('title');
 
     my $article  = WWW::AdventCalendar::Article->new(
-      body  => $document->body,
-      date  => _parse_isodate($isodate),
-      title => $document->header('title'),
-      topic    => $document->header('topic'),
+      body   => $document->body,
+      date   => _parse_isodate($isodate),
+      title  => $document->header('title'),
+      topic  => $document->header('topic'),
+      author => $document->header('author')
+             // scalar $self->default_author,
       calendar => $self,
     );
 
@@ -329,7 +339,7 @@ WWW::AdventCalendar - a calendar for a month of articles (on the web)
 
 =head1 VERSION
 
-version 1.102
+version 1.103
 
 =head1 DESCRIPTION
 
@@ -468,6 +478,10 @@ The base URI of the calendar, including trailing slash.
 =item editor
 
 The name of the calendar's editor, used in the feed.
+
+=item default_author
+
+The name of the calendar's default author, used for articles that provide none.
 
 =item year
 
