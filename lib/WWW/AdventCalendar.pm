@@ -1,6 +1,6 @@
 package WWW::AdventCalendar;
 {
-  $WWW::AdventCalendar::VERSION = '1.103';
+  $WWW::AdventCalendar::VERSION = '1.104';
 }
 use Moose;
 # ABSTRACT: a calendar for a month of articles (on the web)
@@ -17,6 +17,7 @@ use File::Basename;
 use File::Copy qw(copy);
 use File::Path 2.07 qw(remove_tree);
 use File::ShareDir;
+use Gravatar::URL ();
 use HTML::Mason::Interp;
 use Moose::Util::TypeConstraints;
 use Path::Class ();
@@ -85,6 +86,12 @@ has color_palette => (
   is  => 'ro',
   isa => 'Color::Palette',
   required => 1,
+);
+
+has css_hrefs => (
+  traits  => [ 'Array' ],
+  handles => { css_hrefs => 'elements' },
+  default => sub { [] },
 );
 
 sub _masonize {
@@ -339,7 +346,7 @@ WWW::AdventCalendar - a calendar for a month of articles (on the web)
 
 =head1 VERSION
 
-version 1.103
+version 1.104
 
 =head1 DESCRIPTION
 

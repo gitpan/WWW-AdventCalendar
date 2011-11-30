@@ -34,12 +34,15 @@ my %WriteMakefileArgs = (
     "Config::MVP::Reader::INI" => 0,
     "DateTime" => 0,
     "DateTime::Format::W3CDTF" => 0,
+    "Digest::MD5" => 0,
+    "Email::Address" => 0,
     "Email::Simple" => 0,
     "File::Basename" => 0,
     "File::Copy" => 0,
     "File::Path" => "2.07",
     "File::ShareDir" => 0,
     "Getopt::Long::Descriptive" => "0.083",
+    "Gravatar::URL" => 0,
     "HTML::Mason::Interp" => 0,
     "Moose" => "0.70",
     "Moose::Util::TypeConstraints" => 0,
@@ -59,7 +62,7 @@ my %WriteMakefileArgs = (
     "strict" => 0,
     "warnings" => 0
   },
-  "VERSION" => "1.103",
+  "VERSION" => "1.104",
   "test" => {
     "TESTS" => "t/*.t"
   }

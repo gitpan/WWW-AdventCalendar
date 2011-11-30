@@ -1,12 +1,14 @@
 package WWW::AdventCalendar::Article;
 {
-  $WWW::AdventCalendar::Article::VERSION = '1.103';
+  $WWW::AdventCalendar::Article::VERSION = '1.104';
 }
 use Moose;
 # ABSTRACT: one article in an advent calendar
 
 
 use autodie;
+use Digest::MD5 qw(md5_hex);
+use Email::Address;
 use Pod::Elemental;
 use Pod::Elemental::Transformer::Pod5;
 use Pod::Elemental::Transformer::SynMux;
@@ -16,6 +18,8 @@ use Pod::Elemental::Transformer::VimHTML;
 use Pod::Elemental::Transformer::List;
 use Pod::Simple::XHTML 3.13;
 
+use namespace::autoclean;
+
 
 has date => (is => 'ro', isa => 'DateTime', required => 1);
 has [ qw(author title topic body) ] => (
@@ -23,6 +27,15 @@ has [ qw(author title topic body) ] => (
   isa => 'Str',
   required => 1,
 );
+
+
+sub author_email {
+  my ($self) = @_;
+  my ($addr) = Email::Address->parse($self->author);
+  return($addr
+        ? $addr->address
+        : md5_hex($self->author) . q{@advcal.example.com});
+}
 
 
 has calendar => (
@@ -101,7 +114,7 @@ WWW::AdventCalendar::Article - one article in an advent calendar
 
 =head1 VERSION
 
-version 1.103
+version 1.104
 
 =head1 DESCRIPTION
 
@@ -126,7 +139,10 @@ become optional in the future.
 
 =head2 author
 
-This is the author of the article.  This attribute is required.
+This is the author of the article.  This attribute is required.  It should be
+given in mailbox format:
+
+  John Smith <jsmith@example.com>
 
 =head2 body
 
@@ -140,6 +156,13 @@ This is the WWW::AdventCalendar object in which the article is found.
 
 This is the body represented as HTML.  It is generated as required by a private
 builder method.
+
+=head1 METHODS
+
+=head2 author_email
+
+This returns the email portion of the author.  If none is present, it returns
+an email-like string unique to the author's name.
 
 =head1 AUTHOR
 

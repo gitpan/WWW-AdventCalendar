@@ -1,6 +1,6 @@
 package WWW::AdventCalendar::Config;
 {
-  $WWW::AdventCalendar::Config::VERSION = '1.103';
+  $WWW::AdventCalendar::Config::VERSION = '1.104';
 }
 use Moose;
 extends 'Config::MVP::Reader::INI';
@@ -31,8 +31,11 @@ sub build_assembler {
 
   my $section = $assembler->section_class->new({
     name => '_',
-    aliases => { category => 'categories' },
-    multivalue_args => [ qw( categories ) ],
+    aliases => {
+      category => 'categories',
+      css_href => 'css_hrefs',
+    },
+    multivalue_args => [ qw( categories css_hrefs ) ],
   });
   $assembler->sequence->add_section($section);
 
@@ -50,7 +53,7 @@ WWW::AdventCalendar::Config - Config::MVP-based configuration reader for WWW::Ad
 
 =head1 VERSION
 
-version 1.103
+version 1.104
 
 =head1 DESCRIPTION
 
