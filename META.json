@@ -73,7 +73,7 @@
          "web" : "https://github.com/rjbs/www-adventcalendar"
       }
    },
-   "version" : "1.104",
+   "version" : "1.105",
    "x_Dist_Zilla" : {
       "plugins" : [
          {

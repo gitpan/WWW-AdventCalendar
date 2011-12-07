@@ -1,6 +1,6 @@
 package WWW::AdventCalendar;
 {
-  $WWW::AdventCalendar::VERSION = '1.104';
+  $WWW::AdventCalendar::VERSION = '1.105';
 }
 use Moose;
 # ABSTRACT: a calendar for a month of articles (on the web)
@@ -285,7 +285,7 @@ sub build {
       updated   => $self->_w3cdtf($article->date),
       (map {; category => $_ } @{ $self->categories }),
 
-      contributor => { name => $article->author },
+      contributor => { name => $article->author_name },
     );
   }
 
@@ -346,7 +346,7 @@ WWW::AdventCalendar - a calendar for a month of articles (on the web)
 
 =head1 VERSION
 
-version 1.104
+version 1.105
 
 =head1 DESCRIPTION
 

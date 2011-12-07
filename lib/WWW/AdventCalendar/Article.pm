@@ -1,6 +1,6 @@
 package WWW::AdventCalendar::Article;
 {
-  $WWW::AdventCalendar::Article::VERSION = '1.104';
+  $WWW::AdventCalendar::Article::VERSION = '1.105';
 }
 use Moose;
 # ABSTRACT: one article in an advent calendar
@@ -36,6 +36,14 @@ sub author_email {
         ? $addr->address
         : md5_hex($self->author) . q{@advcal.example.com});
 }
+
+
+sub author_name {
+  my ($self) = @_;
+  my ($addr) = Email::Address->parse($self->author);
+  return($addr ? $addr->name : $self->author);
+}
+
 
 
 has calendar => (
@@ -114,7 +122,7 @@ WWW::AdventCalendar::Article - one article in an advent calendar
 
 =head1 VERSION
 
-version 1.104
+version 1.105
 
 =head1 DESCRIPTION
 
@@ -163,6 +171,11 @@ builder method.
 
 This returns the email portion of the author.  If none is present, it returns
 an email-like string unique to the author's name.
+
+=head2 author_name
+
+This returns the name portion of the author.  If the author value doesn't
+appear to be a mailbox string, the whole value is returned.
 
 =head1 AUTHOR
 
