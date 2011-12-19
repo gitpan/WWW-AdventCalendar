@@ -28,7 +28,8 @@ my %WriteMakefileArgs = (
   "NAME" => "WWW::AdventCalendar",
   "PREREQ_PM" => {
     "Calendar::Simple" => 0,
-    "Color::Palette" => "0.100000",
+    "Color::Palette" => "0.100002",
+    "Color::Palette::Schema" => 0,
     "Config::MVP" => 2,
     "Config::MVP::Assembler" => 0,
     "Config::MVP::Reader::INI" => 0,
@@ -62,7 +63,7 @@ my %WriteMakefileArgs = (
     "strict" => 0,
     "warnings" => 0
   },
-  "VERSION" => "1.105",
+  "VERSION" => "1.106",
   "test" => {
     "TESTS" => "t/*.t"
   }

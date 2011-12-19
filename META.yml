@@ -16,7 +16,8 @@ meta-spec:
 name: WWW-AdventCalendar
 requires:
   Calendar::Simple: 0
-  Color::Palette: 0.100000
+  Color::Palette: 0.100002
+  Color::Palette::Schema: 0
   Config::MVP: 2
   Config::MVP::Assembler: 0
   Config::MVP::Reader::INI: 0
@@ -50,9 +51,9 @@ requires:
   strict: 0
   warnings: 0
 resources:
-  homepage: https://github.com/rjbs/www-adventcalendar
-  repository: https://github.com/rjbs/www-adventcalendar.git
-version: 1.105
+  homepage: https://github.com/rjbs/WWW-AdventCalendar
+  repository: https://github.com/rjbs/WWW-AdventCalendar.git
+version: 1.106
 x_Dist_Zilla:
   plugins:
     -

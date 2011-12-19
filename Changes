@@ -1,5 +1,10 @@
 Revision history for WWW-AdventCalendar
 
+1.106     2011-12-19 16:45:30 America/New_York
+          call article authors "authors" in the Atom, not "contributors"
+
+          use a strict, optimized %color hash for the color palette
+
 1.105     2011-12-07 08:54:55 America/New_York
           only put the author's name in the feed, not email address
 

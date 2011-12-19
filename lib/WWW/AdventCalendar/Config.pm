@@ -1,6 +1,6 @@
 package WWW::AdventCalendar::Config;
 {
-  $WWW::AdventCalendar::Config::VERSION = '1.105';
+  $WWW::AdventCalendar::Config::VERSION = '1.106';
 }
 use Moose;
 extends 'Config::MVP::Reader::INI';
@@ -53,7 +53,7 @@ WWW::AdventCalendar::Config - Config::MVP-based configuration reader for WWW::Ad
 
 =head1 VERSION
 
-version 1.105
+version 1.106
 
 =head1 DESCRIPTION
 

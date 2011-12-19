@@ -1,6 +1,6 @@
 package WWW::AdventCalendar;
 {
-  $WWW::AdventCalendar::VERSION = '1.105';
+  $WWW::AdventCalendar::VERSION = '1.106';
 }
 use Moose;
 # ABSTRACT: a calendar for a month of articles (on the web)
@@ -9,6 +9,8 @@ use MooseX::StrictConstructor;
 
 use autodie;
 use Calendar::Simple;
+use Color::Palette 0.100002; # optimized_for, as_strict_css_hash
+use Color::Palette::Schema;
 use DateTime::Format::W3CDTF;
 use DateTime;
 use DateTime;
@@ -162,6 +164,68 @@ sub BUILD {
 }
 
 
+my $SCHEMA = Color::Palette::Schema->new({
+  required_colors => [ qw(
+    bodyBG
+    bodyFG
+    blotterBG
+    blotterBorder
+    contentBG
+    contentBorder
+
+    feedLinkFG
+
+    headerFG
+
+    linkFG
+
+    linkDisabledFG
+
+    linkHoverFG
+    linkHoverBG
+
+    quoteBorder
+
+    sectionBorder
+
+    taglineBG
+    taglineFG
+    taglineBorder
+
+    titleFG
+
+    calendarHeaderCellBorder
+    calendarHeaderCellBG
+
+    calendarIgnoredDayBG
+
+    calendarPastDayBG
+    calendarPastDayFG
+
+    calendarPastDayHoverBG
+    calendarPastDayHoverFG
+
+    calendarTodayBG
+    calendarTodayFG
+
+    calendarTodayHoverBG
+    calendarTodayHoverFG
+
+    calendarFutureDayBG
+    calendarFutureDayFG
+
+    calendarMissingDayFG
+    calendarMissingDayBG
+
+    codeBG
+    codeFG
+
+    codeNumbersBG
+    codeNumbersFG
+    codeNumbersBorder
+  ) ],
+});
+
 sub build {
   my ($self) = @_;
 
@@ -172,9 +236,11 @@ sub build {
   copy "$_" => $self->output_dir
     for grep { ! $_->is_dir } $self->share_dir->subdir('static')->children;
 
+  my $opt_palette = $self->color_palette->optimized_for($SCHEMA);
+
   $self->output_dir->file("style.css")->openw->print(
     $self->_masonize('/style.css', {
-      color => $self->color_palette->as_css_hash,
+      color => $opt_palette->as_strict_css_hash,
     }),
   );
 
@@ -285,7 +351,7 @@ sub build {
       updated   => $self->_w3cdtf($article->date),
       (map {; category => $_ } @{ $self->categories }),
 
-      contributor => { name => $article->author_name },
+      author => { name => $article->author_name },
     );
   }
 
@@ -346,7 +412,7 @@ WWW::AdventCalendar - a calendar for a month of articles (on the web)
 
 =head1 VERSION
 
-version 1.105
+version 1.106
 
 =head1 DESCRIPTION
 
