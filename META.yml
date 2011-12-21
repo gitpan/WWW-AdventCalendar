@@ -53,7 +53,7 @@ requires:
 resources:
   homepage: https://github.com/rjbs/WWW-AdventCalendar
   repository: https://github.com/rjbs/WWW-AdventCalendar.git
-version: 1.106
+version: 1.107
 x_Dist_Zilla:
   plugins:
     -

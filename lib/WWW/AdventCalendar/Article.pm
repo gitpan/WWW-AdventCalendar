@@ -1,6 +1,6 @@
 package WWW::AdventCalendar::Article;
 {
-  $WWW::AdventCalendar::Article::VERSION = '1.106';
+  $WWW::AdventCalendar::Article::VERSION = '1.107';
 }
 use Moose;
 # ABSTRACT: one article in an advent calendar
@@ -122,7 +122,7 @@ WWW::AdventCalendar::Article - one article in an advent calendar
 
 =head1 VERSION
 
-version 1.106
+version 1.107
 
 =head1 DESCRIPTION
 
