@@ -1,6 +1,6 @@
 package WWW::AdventCalendar::Config;
 {
-  $WWW::AdventCalendar::Config::VERSION = '1.108';
+  $WWW::AdventCalendar::Config::VERSION = '1.109';
 }
 use Moose;
 extends 'Config::MVP::Reader::INI';
@@ -45,6 +45,7 @@ sub build_assembler {
 1;
 
 __END__
+
 =pod
 
 =head1 NAME
@@ -53,7 +54,7 @@ WWW::AdventCalendar::Config - Config::MVP-based configuration reader for WWW::Ad
 
 =head1 VERSION
 
-version 1.108
+version 1.109
 
 =head1 DESCRIPTION
 
@@ -71,10 +72,9 @@ Ricardo SIGNES <rjbs@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2011 by Ricardo SIGNES.
+This software is copyright (c) 2013 by Ricardo SIGNES.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-

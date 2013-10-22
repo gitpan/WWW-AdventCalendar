@@ -18,6 +18,7 @@ my ($opt, $usage) = describe_options(
   [ 'today=s',         'the day we treat as "today"; default to today'     ],
   [],
   [ 'tracker-id|t=s',  'include Google Analytics; -t TRACKER-ID' ],
+  [ 'uri=s',           'The base URI of the calendar, including trailing slash'     ],  
 );
 
 my $arg = {};
@@ -122,8 +123,8 @@ my $cal = WWW::AdventCalendar->new({
 
 $cal->build;
 
-
 __END__
+
 =pod
 
 =head1 NAME
@@ -132,7 +133,7 @@ advcal - build an advent calendar
 
 =head1 VERSION
 
-version 1.108
+version 1.109
 
 =head1 USAGE
 
@@ -153,10 +154,9 @@ Ricardo SIGNES <rjbs@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2011 by Ricardo SIGNES.
+This software is copyright (c) 2013 by Ricardo SIGNES.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
