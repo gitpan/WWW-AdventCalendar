@@ -127,13 +127,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 advcal - build an advent calendar
 
 =head1 VERSION
 
-version 1.109
+version 1.110
 
 =head1 USAGE
 
