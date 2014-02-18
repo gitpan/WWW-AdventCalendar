@@ -1,4 +1,5 @@
 #!perl
+
 use strict;
 use warnings;
 # ABSTRACT: build an advent calendar
@@ -8,6 +9,21 @@ use lib 'lib';
 
 use Getopt::Long::Descriptive 0.083;
 
+# =head1 USAGE
+#
+#   advcal [-aot] [long options...]
+#     -c --config       the ini file to read for configuration
+#     -a --article-dir  the root of articles
+#     --share-dir       the root of shared files
+#     -o --output-dir   output directory
+#     --today           the day we treat as "today"; default to today
+#
+#     -t --tracker      include Google Analytics; -t TRACKER-ID
+#     -y --year-links   place year links at the bottom of the page
+#
+# For more detailed information, see L<WWW::AdventCalendar>.
+#
+# =cut
 
 my ($opt, $usage) = describe_options(
   '%c %o',
@@ -17,8 +33,9 @@ my ($opt, $usage) = describe_options(
   [ 'output-dir|o=s',  'output directory',     { default => './out'      } ],
   [ 'today=s',         'the day we treat as "today"; default to today'     ],
   [],
-  [ 'tracker-id|t=s',  'include Google Analytics; -t TRACKER-ID' ],
-  [ 'uri=s',           'The base URI of the calendar, including trailing slash'     ],  
+  [ 'tracker-id|t=s',  'include Google Analytics; -t TRACKER-ID'           ],
+  [ 'uri=s',           'base URI of the calendar, including trailing slash' ],
+  [ 'year-links|y',    'add year links to bottom of index.html'            ],
 );
 
 my $arg = {};
@@ -135,7 +152,7 @@ advcal - build an advent calendar
 
 =head1 VERSION
 
-version 1.110
+version 1.111
 
 =head1 USAGE
 
@@ -147,6 +164,7 @@ version 1.110
     --today           the day we treat as "today"; default to today
 
     -t --tracker      include Google Analytics; -t TRACKER-ID
+    -y --year-links   place year links at the bottom of the page
 
 For more detailed information, see L<WWW::AdventCalendar>.
 
@@ -156,7 +174,7 @@ Ricardo SIGNES <rjbs@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Ricardo SIGNES.
+This software is copyright (c) 2014 by Ricardo SIGNES.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

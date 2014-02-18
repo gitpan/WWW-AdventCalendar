@@ -1,10 +1,15 @@
 package WWW::AdventCalendar::Article;
-{
-  $WWW::AdventCalendar::Article::VERSION = '1.110';
-}
-use Moose;
 # ABSTRACT: one article in an advent calendar
+$WWW::AdventCalendar::Article::VERSION = '1.111';
+use Moose;
 
+# =head1 DESCRIPTION
+#
+# Objects of this class represent a single article in a L<WWW::AdventCalendar>.
+# They have a very limited set of attributes.  The primary task of this class is
+# the production of an HTML version of the article's body.
+#
+# =cut
 
 use autodie;
 use Digest::MD5 qw(md5_hex);
@@ -20,6 +25,31 @@ use Pod::Simple::XHTML 3.13;
 
 use namespace::autoclean;
 
+# =attr date
+#
+# This is the date (a DateTime object) on which the article is to be published.
+#
+# =attr title
+#
+# This is the title of the article.
+#
+# =attr topic
+#
+# This is the topic of the article.  This attribute is required, for now, but may
+# become optional in the future.
+#
+# =attr author
+#
+# This is the author of the article.  This attribute is required.  It should be
+# given in mailbox format:
+#
+#   John Smith <jsmith@example.com>
+#
+# =attr body
+#
+# This is the body of the document, as a string.  It is expected to be Pod.
+#
+# =cut
 
 has date => (is => 'ro', isa => 'DateTime', required => 1);
 has [ qw(author title topic body) ] => (
@@ -28,6 +58,12 @@ has [ qw(author title topic body) ] => (
   required => 1,
 );
 
+# =method author_email
+#
+# This returns the email portion of the author.  If none is present, it returns
+# an email-like string unique to the author's name.
+#
+# =cut
 
 sub author_email {
   my ($self) = @_;
@@ -37,6 +73,12 @@ sub author_email {
         : md5_hex($self->author) . q{@advcal.example.com});
 }
 
+# =method author_name
+#
+# This returns the name portion of the author.  If the author value doesn't
+# appear to be a mailbox string, the whole value is returned.
+#
+# =cut
 
 sub author_name {
   my ($self) = @_;
@@ -45,6 +87,11 @@ sub author_name {
 }
 
 
+# =attr calendar
+#
+# This is the WWW::AdventCalendar object in which the article is found.
+#
+# =cut
 
 has calendar => (
   is  => 'ro',
@@ -53,6 +100,12 @@ has calendar => (
   weak_ref => 1,
 );
 
+# =attr body_html
+#
+# This is the body represented as HTML.  It is generated as required by a private
+# builder method.
+#
+# =cut
 
 has body_html => (
   is   => 'ro',
@@ -126,7 +179,7 @@ WWW::AdventCalendar::Article - one article in an advent calendar
 
 =head1 VERSION
 
-version 1.110
+version 1.111
 
 =head1 DESCRIPTION
 
@@ -187,7 +240,7 @@ Ricardo SIGNES <rjbs@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Ricardo SIGNES.
+This software is copyright (c) 2014 by Ricardo SIGNES.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
